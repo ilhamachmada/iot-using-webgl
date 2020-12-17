@@ -1,0 +1,16 @@
+<script>
+    engine = createDefaultEngine();
+           if (!engine) throw 'engine should not be null.';
+           scene = createScene();
+   
+           engine.runRenderLoop(function () {
+               if (scene) {
+                   scene.render();
+               }
+           });
+   
+           // Resize
+           window.addEventListener("resize", function () {
+               engine.resize();
+           });
+   </script>
