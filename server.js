@@ -5,6 +5,7 @@ const app = express();
 
 const armRobotView = require('./routes/arm-robot');
 const virtualFarm = require('./routes/virtual-farm');
+const testing = require('./routes/testing');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -13,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(armRobotView);
 app.use(virtualFarm);
+app.use(testing);
 //root url harus bawah sendiri
 
 app.use((req,res,next) => {

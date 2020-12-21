@@ -1,16 +1,43 @@
 <script>
-    engine = createDefaultEngine();
-           if (!engine) throw 'engine should not be null.';
-           scene = createScene();
+    // engine = createDefaultEngine();
+    //        if (!engine) throw 'engine should not be null.';
+    //        scene = createScene();
    
-           engine.runRenderLoop(function () {
-               if (scene) {
-                   scene.render();
-               }
-           });
+    //        engine.runRenderLoop(function () {
+    //            if (scene) {
+    //                scene.render();
+    //            }
+    //        });
    
-           // Resize
-           window.addEventListener("resize", function () {
-               engine.resize();
-           });
+    //        // Resize
+    //        window.addEventListener("resize", function () {
+    //            engine.resize();
+    //        });
+    var engine;
+                var scene;
+                initFunction = async function() {               
+                    var asyncEngineCreation = async function() {
+                        try {
+                        return createDefaultEngine();
+                        } catch(e) {
+                        console.log("the available createEngine function failed. Creating the default engine instead");
+                        return createDefaultEngine();
+                        }
+                    }
+
+                    engine = await asyncEngineCreation();
+        if (!engine) throw 'engine should not be null.';
+        scene = delayCreateScene();};
+        initFunction().then(() => {sceneToRender = scene        
+            engine.runRenderLoop(function () {
+                if (sceneToRender && sceneToRender.activeCamera) {
+                    sceneToRender.render();
+                }
+            });
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
    </script>
